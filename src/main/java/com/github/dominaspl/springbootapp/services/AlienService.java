@@ -72,6 +72,27 @@ public class AlienService {
 
     }
 
+    @Transactional
+    public void updateAlien(AlienDTO form) {
 
+        if (form == null) {
+            throw new IllegalStateException("Form can't be empty");
+        }
 
+        if (form.getId() == null) {
+            throw new IllegalStateException("Id can't be null");
+        }
+
+        Optional<Alien> optionalAlien = alienRepository.findById(form.getId());
+        Alien alien = optionalAlien.orElse(null);
+
+        if (alien == null) {
+            throw new IllegalStateException("Alien not found");
+        }
+
+        alien.setName(form.getName());
+        alien.setTech(form.getTech());
+        alienRepository.save(alien);
+
+    }
 }

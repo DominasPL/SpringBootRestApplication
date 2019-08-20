@@ -53,6 +53,15 @@ public class AlienController {
         return alienDTO;
     }
 
+    @PutMapping(value = "/alien", consumes = {"application/json"})
+    public AlienDTO updateAlien(@RequestBody AlienDTO alienDTO) {
+
+        alienService.updateAlien(alienDTO);
+
+        return alienDTO;
+
+    }
+
     @GetMapping("/addAlien")
     public String displayAddAlienForm(Model model) {
 
