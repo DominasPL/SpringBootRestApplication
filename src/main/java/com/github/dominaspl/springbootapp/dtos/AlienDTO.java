@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 @RequiredArgsConstructor
 public class AlienDTO {
 
+    private Long id;
     @Size(min = 3, max = 15)
     private String name;
     @Size(min = 2, max = 20)

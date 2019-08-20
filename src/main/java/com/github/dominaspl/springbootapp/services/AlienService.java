@@ -4,13 +4,15 @@ import com.github.dominaspl.springbootapp.converters.AlienConverter;
 import com.github.dominaspl.springbootapp.dtos.AlienDTO;
 import com.github.dominaspl.springbootapp.models.Alien;
 import com.github.dominaspl.springbootapp.repositories.AlienRepository;
-import org.springframework.core.convert.converter.Converter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class AlienService {
 
     private AlienRepository alienRepository;
@@ -42,4 +44,18 @@ public class AlienService {
 
         return AlienConverter.convertToAlienDTO(alien);
     }
+
+    public List<AlienDTO> findAllAliens() {
+
+        List<Alien> aliens = alienRepository.findAll();
+
+        if (aliens == null) {
+            log.info("Aliens not found");
+            return null;
+        }
+
+        return AlienConverter.convertToAlienDTOList(alienRepository.findAll());
+
+    }
+
 }

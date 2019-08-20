@@ -10,13 +10,28 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/alien")
+@RequestMapping("/aliens")
 public class AlienController {
 
     private AlienService alienService;
 
     public AlienController(AlienService alienService) {
         this.alienService = alienService;
+    }
+
+    @GetMapping
+    @ResponseBody
+    public String getAliens() {
+
+        return alienService.findAllAliens().toString();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public String getAlien(@PathVariable("id") Long id) {
+
+        return alienService.getAlienById(id).toString();
+
     }
 
     @GetMapping("/addAlien")
@@ -54,6 +69,8 @@ public class AlienController {
 
         return "show-alien";
     }
+
+
 
 
 }
