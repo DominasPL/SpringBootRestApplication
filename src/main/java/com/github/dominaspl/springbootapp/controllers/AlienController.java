@@ -1,19 +1,16 @@
 package com.github.dominaspl.springbootapp.controllers;
 
-import com.github.dominaspl.springbootapp.dtos.AddAlienDTO;
+import com.github.dominaspl.springbootapp.dtos.AlienDTO;
 import com.github.dominaspl.springbootapp.services.AlienService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/addAlien")
+@RequestMapping("/alien")
 public class AlienController {
 
     private AlienService alienService;
@@ -22,16 +19,16 @@ public class AlienController {
         this.alienService = alienService;
     }
 
-    @GetMapping
-    public String displayAlienForm(Model model) {
+    @GetMapping("/addAlien")
+    public String displayAddAlienForm(Model model) {
 
-        model.addAttribute("form", new AddAlienDTO());
+        model.addAttribute("form", new AlienDTO());
 
         return "add-alien";
     }
 
-    @PostMapping
-    public String addAlien(@Valid @ModelAttribute("form") AddAlienDTO form, BindingResult result) {
+    @PostMapping("/addAlien")
+    public String addAlien(@Valid @ModelAttribute("form") AlienDTO form, BindingResult result) {
 
         if (result.hasErrors()) {
             return "add-alien";
@@ -39,7 +36,24 @@ public class AlienController {
 
         alienService.addAlien(form);
 
-        return "redirect:/";
+        return "redirect:/alien/addAlien";
     }
+
+    @GetMapping("/alienIdForm")
+    public String displayGetAlienForm() {
+
+        return "alien-id-form";
+    }
+
+    @GetMapping("/alienIdForm/getAlien")
+    public String getAlien(Model model, @RequestParam("id") Long id) {
+
+        AlienDTO alienDTO = alienService.getAlienById(id);
+
+        model.addAttribute("alien", alienDTO);
+
+        return "show-alien";
+    }
+
 
 }

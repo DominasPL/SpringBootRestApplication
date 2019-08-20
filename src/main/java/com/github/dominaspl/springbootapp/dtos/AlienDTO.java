@@ -3,10 +3,15 @@ package com.github.dominaspl.springbootapp.dtos;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.Size;
+
 @Data
 @RequiredArgsConstructor
-public class AddAlienDTO {
+public class AlienDTO {
 
+    @Size(min = 3, max = 15)
     private String name;
+    @Size(min = 2, max = 20)
+    private String tech;
 
 }

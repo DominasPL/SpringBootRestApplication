@@ -18,6 +18,8 @@
         <form:errors path="*"/>
         Give an alien name: <br>
         <form:input path="name"/> <br>
+        Give a tech: <br>
+        <form:input path="tech"/> <br>
         <input type="submit" value="Submit">
     </form:form>
 
