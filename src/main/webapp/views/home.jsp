@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: dominik
@@ -13,8 +14,12 @@
 </head>
 <body>
 
-    <h1>HELLO</h1>
-
+    <form:form modelAttribute="alien" method="post">
+        <form:errors path="*"/>
+        Give an alien name: <br>
+        <form:input path="name"/> <br>
+        <input type="submit" value="Submit">
+    </form:form>
 
 </body>
 </html>
