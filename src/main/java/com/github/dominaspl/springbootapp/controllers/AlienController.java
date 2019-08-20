@@ -1,6 +1,7 @@
 package com.github.dominaspl.springbootapp.controllers;
 
 import com.github.dominaspl.springbootapp.dtos.AlienDTO;
+import com.github.dominaspl.springbootapp.models.Alien;
 import com.github.dominaspl.springbootapp.services.AlienService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/aliens")
 public class AlienController {
 
@@ -20,17 +22,24 @@ public class AlienController {
     }
 
     @GetMapping
-    @ResponseBody
-    public String getAliens() {
+    public List<AlienDTO> getAliens() {
 
-        return alienService.findAllAliens().toString();
+        return alienService.findAllAliens();
     }
 
-    @GetMapping("/{id}")
-    @ResponseBody
-    public String getAlien(@PathVariable("id") Long id) {
+    @GetMapping("/alien/{id}")
+    public AlienDTO getAlien(@PathVariable("id") Long id) {
 
-        return alienService.getAlienById(id).toString();
+        return alienService.getAlienById(id);
+
+    }
+
+    @PostMapping("/alien")
+    public AlienDTO addAlien(@RequestBody AlienDTO alienDTO) {
+
+        alienService.addAlien(alienDTO);
+
+        return alienDTO;
 
     }
 
