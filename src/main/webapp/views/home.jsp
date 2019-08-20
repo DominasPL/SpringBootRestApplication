@@ -1,25 +1,19 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: dominik
   Date: 8/20/19
-  Time: 4:38 PM
+  Time: 5:37 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home page</title>
+    <title>Home</title>
 </head>
 <body>
 
-    <form:form modelAttribute="alien" method="post">
-        <form:errors path="*"/>
-        Give an alien name: <br>
-        <form:input path="name"/> <br>
-        <input type="submit" value="Submit">
-    </form:form>
+    <h1>This is home PAge!</h1>
 
 </body>
 </html>
