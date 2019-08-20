@@ -34,13 +34,23 @@ public class AlienController {
 
     }
 
-    @PostMapping("/alien")
+    @PostMapping(value = "/alien", consumes = {"application/json"})
     public AlienDTO addAlien(@RequestBody AlienDTO alienDTO) {
 
         alienService.addAlien(alienDTO);
 
         return alienDTO;
 
+    }
+
+    @DeleteMapping("/alien/{id}")
+    public AlienDTO deleteAlien(@PathVariable("id") Long id) {
+
+        AlienDTO alienDTO = alienService.getAlienById(id);
+
+        alienService.deleteAlien(id);
+
+        return alienDTO;
     }
 
     @GetMapping("/addAlien")

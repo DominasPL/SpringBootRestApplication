@@ -32,6 +32,20 @@ public class AlienService {
 
     }
 
+    @Transactional
+    public void deleteAlien(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("ID must be given!");
+        }
+
+        Optional<Alien> optionalAlien = alienRepository.findById(id);
+        Alien alien = optionalAlien.orElse(new Alien());
+
+        alienRepository.delete(alien);
+
+    }
+
     public AlienDTO getAlienById(Long id) {
 
         if (id == null) {
@@ -57,6 +71,7 @@ public class AlienService {
         return AlienConverter.convertToAlienDTOList(alienRepository.findAll());
 
     }
+
 
 
 }
